@@ -14,7 +14,6 @@ namespace Common.Core.Services.Contracts
         Task<List<Users>> GetAllUsers();
         string GetLastUsersId();
         string GetUserCount();
-
         int CreateUser(UsersModel users);
         bool UpdateUser(int id, UsersModel users);
         Users GetUsersDetails(int? Id);

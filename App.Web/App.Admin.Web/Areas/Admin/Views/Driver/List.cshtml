@@ -47,11 +47,9 @@
                     <thead>
                         <tr>
                             <th class="text-xs font-weight-bolder ps-3 v-color">Action</th>
-                            <th class="text-xs font-weight-bolder ps-2 v-color">Order ID</th>
-                            <th class="text-xs font-weight-bolder ps-2 v-color">Full Name</th>
+                            <th class="text-xs font-weight-bolder ps-2 v-color">FirstName</th>
                             <th class="text-xs font-weight-bolder ps-2 v-color">Mobile</th>
                             <th class="text-xs font-weight-bolder ps-2 v-color">Order Date </th>
-                            <th class="text-xs font-weight-bolder ps-2 v-color">Status</th>
 
                         </tr>
                     </thead>
@@ -86,11 +84,11 @@
                     "scrollCollapse": true,
                     "paging": false,
                     "ajax": {
-                        "url": '@Url.Content("~/admin/Orders/GetOrders")',
+                        "url": '@Url.Content("~/admin/Driver/GetOrders")',
                         "type": "POST",
                         "datatype": "json",
                         "data": {
-                            FullName: $('#divName').val(),
+                            FirstName: $('#divName').val(),
                             CreatedOn: $('#divCreatedOn').val(),
                         },
                     },
@@ -101,18 +99,16 @@
                     }],
                     "columns": [
                         { "data": "id", "name": "id", "autoWidth": true },
-                        { "data": "orderID", "status": "orderID", "autoWidth": true },
-                        { "data": "fullName", "status": "fullName", "autoWidth": true },
-                        { "data": "mobile", "status": "mobile", "autoWidth": true },
+                        { "data": "firstName", "status": "firstName", "autoWidth": true },
+                        { "data": "contactNumber", "status": "contactNumber", "autoWidth": true },
                         {
-                            "data": "createdOn", "name": "createdOn", "autoWidth": true,
+                            "data": "dateOfBirth", "name": "dateOfBirth", "autoWidth": true,
                             render: function (data) {
                                 var formattedDate = moment(data).format('DD-MM-YYYY');
                                 var formattedTime = moment(data).format('hh:mm a');
                                 return formattedDate + ', ' + '<span class="text-xs">' + formattedTime + '</span>';
                             }
                         },
-                        { "data": "orderStatus", "orderStatus": "orderStatus", "autoWidth": true },
 
                     ]
                 });
