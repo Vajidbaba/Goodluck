@@ -18,6 +18,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Todo", "Todo", "{B57FBF2C-B
 		Todo.txt = Todo.txt
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Task", "Task", "{37FC5790-5DDC-428B-A04C-14573DD6E6FF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task.AppStateRepo", "Task.AppStateRepo\Task.AppStateRepo.csproj", "{C381CF01-4186-4E69-845C-F6119CD3A7CB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,6 +40,10 @@ Global
 		{2C820980-D3D0-4CE9-B987-07EB2305FCEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2C820980-D3D0-4CE9-B987-07EB2305FCEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2C820980-D3D0-4CE9-B987-07EB2305FCEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C381CF01-4186-4E69-845C-F6119CD3A7CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C381CF01-4186-4E69-845C-F6119CD3A7CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C381CF01-4186-4E69-845C-F6119CD3A7CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C381CF01-4186-4E69-845C-F6119CD3A7CB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -44,6 +52,7 @@ Global
 		{FD3198A7-95C9-4B16-81D0-8829A50C0D98} = {2FB7BB0B-9B74-4223-8985-62091A814A49}
 		{DE7FA8A8-B792-4F04-8A52-20F5172870CE} = {2FB7BB0B-9B74-4223-8985-62091A814A49}
 		{2C820980-D3D0-4CE9-B987-07EB2305FCEE} = {287398FA-9584-4BD3-941C-823505CD7E0F}
+		{C381CF01-4186-4E69-845C-F6119CD3A7CB} = {37FC5790-5DDC-428B-A04C-14573DD6E6FF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EA57088A-4C0B-4E1D-B0D1-6559136D7CC7}

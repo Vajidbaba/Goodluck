@@ -1,12 +1,7 @@
-﻿using Common.Core.Services.Contracts;
-using Common.Core.ViewModels;
+﻿using Common.Core.ViewModels;
 using Common.Data.Context;
 using Common.Data.Models;
 using Common.Data.Repositories.Contracts;
-using Microsoft.EntityFrameworkCore;
-using System.Linq;
-using static Microsoft.AspNetCore.Hosting.Internal.HostingApplication;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Common.Core.Services
 {

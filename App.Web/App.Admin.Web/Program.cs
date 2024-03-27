@@ -28,6 +28,12 @@ builder.Services.AddTransient(typeof(IGenericRepository<>), typeof(GenericReposi
 builder.Services.AddScoped<IUsersService, UsresService>();
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 builder.Services.AddScoped<IOrdersService, OrdersService>();
+builder.Services.AddScoped<IDriverService, DriverService>();
+builder.Services.AddScoped<IVehicleService, VehicleService>();
+//builder.Services.AddScoped<IVehicleService, VehicleService>();
+
+
+
 builder.Services.AddSingleton<IContextHelper, ContextHelper>();
 
 var app = builder.Build();

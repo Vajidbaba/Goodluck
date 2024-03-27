@@ -27,6 +27,14 @@ namespace App.Admin.Web.Areas.Admin.Controllers
         {
             return View();
         }
+        public IActionResult Edit()
+        {
+            return View();
+        }
+        public IActionResult Details()
+        {
+            return View();
+        }
 
         [HttpPost]
         public IActionResult GetOrders()

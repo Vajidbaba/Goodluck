@@ -46,7 +46,7 @@
                 <table id="table" class="table align-items-center mb-0 table-striped dt-responsive nowrap w-100">
                     <thead>
                         <tr>
-                            <th class="text-xs font-weight-bolder ps-3 v-color">Action</th>
+                            <th class="text-xs font-weight-bolder ps-3 v-color w-15">Action</th>
                             <th class="text-xs font-weight-bolder ps-2 v-color">Order ID</th>
                             <th class="text-xs font-weight-bolder ps-2 v-color">Full Name</th>
                             <th class="text-xs font-weight-bolder ps-2 v-color">Mobile</th>
@@ -95,9 +95,11 @@
                         },
                     },
                     "columnDefs": [{
-                        targets: [0], render: function (data, type, row, meta) {
-                            return '<p type="button" class="text-xs text-primary mb-0 ms-3 font-weight-bolder" onclick="details(' + row.id + ')">' + row.id + '</p>'
-                        },
+                        targets: [0],
+                        render: function (data, type, row, meta) {
+                            return '<a class="badge badge-sm text-capitalize cursor-pointer px-2 py-1 bg-success text-white" onclick="details()"><i class="fa fa-eye me-1"></i>  Show  </a> &nbsp;'
+                                + '<a class="badge badge-sm text-capitalize cursor-pointer px-2 py-1 bg-gradient-dark text-white " onclick="Edit()"><i class="fa fa-pen me-1"></i>  Edit  </a>';
+                        }
                     }],
                     "columns": [
                         { "data": "id", "name": "id", "autoWidth": true },
@@ -119,5 +121,16 @@
             });
 
         }
+
+        function details() {
+            var newPageUrl = '/admin/Orders/Details'; // Replace with your desired URL
+            window.location.href = newPageUrl;
+        }
+
+        function Edit() {
+            var newPageUrl = '/admin/Orders/Edit'; // Replace with your desired URL
+            window.location.href = newPageUrl;
+        }
+        
     </script>
 }

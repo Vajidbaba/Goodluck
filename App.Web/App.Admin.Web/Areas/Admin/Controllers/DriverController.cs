@@ -9,11 +9,11 @@ namespace App.Admin.Web.Areas.Admin.Controllers
     [Area("Admin")]
     public class DriverController : Controller
     {
-        private readonly IOrdersService _orderService;
+        private readonly IDriverService _driverService;
 
-        public DriverController(IOrdersService orderService)
+        public DriverController(IDriverService driverService)
         {
-            _orderService = orderService;
+            _driverService = driverService;
         }
 
         public IActionResult List()
@@ -30,7 +30,7 @@ namespace App.Admin.Web.Areas.Admin.Controllers
         {
             try
             {
-                var model = new DataTableModel();
+                var model = new DriverDataTableModel();
                 model.draw = Request.Form["draw"].FirstOrDefault();
                 model.start = Request.Form["start"].FirstOrDefault();
                 model.lenght = Request.Form["lenght"].FirstOrDefault();
@@ -38,12 +38,11 @@ namespace App.Admin.Web.Areas.Admin.Controllers
                 model.sortColumnDirection = Request.Form["sortColumnDirection "].FirstOrDefault();
                 model.searchValue = Request.Form["searchValue"].FirstOrDefault();
                 model.Id = Request.Form["Id"].FirstOrDefault();
-                model.FullName = Request.Form["FullName"].FirstOrDefault();
+                model.FirstName = Request.Form["FirstName"].FirstOrDefault();
 
-                model.TotalAmount = Request.Form["TotalAmount"].FirstOrDefault();
-                model.OrderStatus = Request.Form["OrderStatus"].FirstOrDefault();
+                model.ContactNumber = Request.Form["TotalAmount"].FirstOrDefault();
+                model.DateOfBirth = Request.Form["OrderStatus"].FirstOrDefault();
 
-                model.OrderID = Request.Form["OrderID"].FirstOrDefault();
                 var createdOnString = Request.Form["CreatedOn"].FirstOrDefault();
                 if (DateTime.TryParse(createdOnString, out DateTime createdOn))
                 {
@@ -51,7 +50,7 @@ namespace App.Admin.Web.Areas.Admin.Controllers
                 }
                 model.pageSize = model.lenght != null ? Convert.ToInt32(model.lenght) : 0;
                 model.skip = model.start != null ? Convert.ToInt32(model.start) : 0;
-                var result = _orderService.GetDataTable(model);
+                var result = _driverService.GetDataTable(model);
                 return Ok(result);
             }
             catch (Exception)
