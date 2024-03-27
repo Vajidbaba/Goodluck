@@ -1,0 +1,64 @@
+﻿<button id="mainButton" class="btn btn-primary">Click to Show Spinner</button>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#mainButton").click(function () {
+            var button = $(this);
+            button.prop('disabled', true).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Processing...'); // Disable button and show spinner
+
+            $.ajax({
+                url: "@Url.Action("YourAction", "YourController")", // Replace with your ASP.NET Core action URL
+                type: 'POST', // Example: Change request type to POST
+                data: {}, // Example: Pass additional data if needed
+                success: function (data) {
+                    // Handle success response
+                },
+                error: function (xhr, status, error) {
+                    // Handle error response
+                },
+                complete: function () {
+                    button.prop('disabled', false).html('Click to Show Spinner'); // Enable button and hide spinner
+                }
+            });
+        });
+    });
+</script>
+
+
+                <!DOCTYPE html>
+<html>
+<head>
+    <title>Another Page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <button id="mainButton" class="btn btn-primary">Click to Show Spinner</button>
+
+    <div class="loading-spinner" style="display: none;">
+        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...
+    </div>
+
+    <!-- Include jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Include loading.js file -->
+    <script src="loading.js"></script>
+
+    <!-- Your custom JavaScript code -->
+    <script>
+        $(document).ready(function () {
+            $("#mainButton").click(function () {
+                // Show loading spinner
+                showLoading();
+
+                // Simulate some asynchronous operation
+                setTimeout(function () {
+                    // Hide loading spinner after some delay
+                    hideLoading();
+                }, 2000); // Example: Hide loading spinner after 2 seconds
+            });
+        });
+    </script>
+</body>
+</html>
