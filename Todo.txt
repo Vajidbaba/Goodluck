@@ -1,32 +1,32 @@
-  <style>
+<style>
     body {
       background-color: #f8f9fa;
     }
     .chat-container {
       height: 80vh;
     }
-    .message {
-      border-radius: 10px;
+    .message-container {
       max-width: 70%;
+      margin-bottom: 10px;
+      overflow-wrap: break-word;
     }
-    .message-text {
-      word-wrap: break-word;
-    }
-    .sender-name {
-      font-weight: bold;
-    }
-    .message-time {
-      font-size: 0.8rem;
-      color: #6c757d;
-    }
-    .message.sender .message-text {
+    .sender-message {
       background-color: #e9ecef;
-      text-align: left;
+      padding: 10px;
+      border-radius: 10px;
+      float: left;
     }
-    .message.receiver .message-text {
+    .receiver-message {
       background-color: #007bff;
       color: white;
-      text-align: right;
+      padding: 10px;
+      border-radius: 10px;
+      float: right;
+    }
+    .clearfix::after {
+      content: "";
+      clear: both;
+      display: table;
     }
   </style>
 </head>
@@ -40,7 +40,14 @@
         <div class="card-body p-0 chat-container">
           <!-- Chat messages -->
           <div class="p-3" id="chat-messages">
-            <!-- Messages will be dynamically added here -->
+            <!-- Messages will be manually added here -->
+            <div class="message-container clearfix">
+              <div class="sender-message">Hello, how are you?</div>
+            </div>
+            <div class="message-container clearfix">
+              <div class="receiver-message">I'm good, thank you!</div>
+            </div>
+            <!-- Add more messages here -->
           </div>
         </div>
         <div class="card-footer">
@@ -56,54 +63,3 @@
     </div>
   </div>
 </div>
-
-<!-- Bootstrap JS (optional) -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.bundle.min.js"></script>
-<!-- Custom JavaScript -->
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const chatMessages = document.getElementById('chat-messages');
-    const messageForm = document.getElementById('message-form');
-    const messageInput = document.getElementById('message-input');
-
-    messageForm.addEventListener('submit', function(event) {
-      event.preventDefault();
-      const messageText = messageInput.value.trim();
-      if (messageText !== '') {
-        sendMessage('Sender', messageText, 'sender');
-        messageInput.value = '';
-      }
-    });
-
-    function sendMessage(sender, message, messageType) {
-      const messageDiv = document.createElement('div');
-      messageDiv.classList.add('message', 'mb-3', messageType);
-
-      const messageTextDiv = document.createElement('div');
-      messageTextDiv.classList.add('message-text', 'p-2');
-      
-      const senderSpan = document.createElement('span');
-      senderSpan.classList.add('sender-name');
-      senderSpan.textContent = sender + ': ';
-
-      const messageSpan = document.createElement('span');
-      messageSpan.textContent = message;
-
-      const timeSpan = document.createElement('span');
-      timeSpan.classList.add('message-time');
-      const now = new Date();
-      const timeString = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
-      timeSpan.textContent = timeString;
-
-      messageTextDiv.appendChild(senderSpan);
-      messageTextDiv.appendChild(messageSpan);
-      messageTextDiv.appendChild(timeSpan);
-      messageDiv.appendChild(messageTextDiv);
-
-      chatMessages.appendChild(messageDiv);
-
-      // Scroll to the bottom of the chat container
-      chatMessages.scrollTop = chatMessages.scrollHeight;
-    }
-  });
-</script>
