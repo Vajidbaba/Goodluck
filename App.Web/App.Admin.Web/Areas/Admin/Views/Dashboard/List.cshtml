@@ -4,7 +4,123 @@
     ViewData["Title"] = "Dashboard";
 }
 <h6 class="font-weight-bolder va-title v-color">Dashboard</h6>
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
 
+    .chat-container {
+        height: 80vh;
+    }
+
+    .message {
+        border-radius: 10px;
+        max-width: 70%;
+    }
+
+    .message-text {
+        word-wrap: break-word;
+    }
+
+    .sender-name {
+        font-weight: bold;
+    }
+
+    .message-time {
+        font-size: 0.8rem;
+        color: #6c757d;
+    }
+
+    .input-group-text {
+        cursor: pointer;
+    }
+
+    .admin-message {
+        text-align: right;
+    }
+</style>
+
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-primary text-white">Team Chat</div>
+                <div class="card-body p-0 chat-container">
+                    <!-- Chat messages -->
+                    <div class="p-3" id="chat-messages">
+                        <!-- Messages will be dynamically added here -->
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <!-- Message input -->
+                    <form id="message-form">
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="message-input" placeholder="Type your message...">
+                            <button type="submit" class="btn btn-primary">Send</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const chatMessages = document.getElementById('chat-messages');
+            const messageForm = document.getElementById('message-form');
+            const messageInput = document.getElementById('message-input');
+
+            messageForm.addEventListener('submit', function (event) {
+                event.preventDefault();
+                const messageText = messageInput.value.trim();
+                if (messageText !== '') {
+                    sendMessage('Admin', messageText, true);
+                    messageInput.value = '';
+                }
+            });
+
+            function sendMessage(sender, message, isAdmin) {
+                const messageDiv = document.createElement('div');
+                messageDiv.classList.add('message', 'mb-3');
+
+                const messageTextDiv = document.createElement('div');
+                messageTextDiv.classList.add('message-text', 'p-2', 'bg-light');
+                if (isAdmin) {
+                    messageTextDiv.classList.add('admin-message');
+                }
+
+                const senderSpan = document.createElement('span');
+                senderSpan.classList.add('sender-name');
+                senderSpan.textContent = sender + ': ';
+
+                const messageSpan = document.createElement('span');
+                messageSpan.textContent = message;
+
+                const timeSpan = document.createElement('span');
+                timeSpan.classList.add('message-time');
+                const now = new Date();
+                const timeString = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+                timeSpan.textContent = timeString;
+
+                messageTextDiv.appendChild(senderSpan);
+                messageTextDiv.appendChild(messageSpan);
+                messageTextDiv.appendChild(timeSpan);
+                messageDiv.appendChild(messageTextDiv);
+
+                chatMessages.appendChild(messageDiv);
+
+                // Scroll to the bottom of the chat container
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+
+            // Example: Sending initial message from Admin
+            sendMessage('Admin', 'Welcome to the chat!', true);
+        });
+    </script>
+}
+@*
 <div class="row">
     <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
         <div class="card rounded-3">
@@ -95,72 +211,5 @@
         </div>
     </div>
 </div>
-
-@*
-<div class="pt-3">
-    <div class="row">
-        <div class="col-12">
-            <div class="card m-0">
-                <div class="card-header p-3">
-                    <h6>Authors table</h6>
-                </div>
-                <div class="card-body p-0">
-                    <div class="p-2" style="height:340px;overflow:auto">
-                        <table class="table align-items-center mb-0 table-striped dt-responsive nowrap">
-                            <thead>
-                                <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Id</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Email</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Password</th>
-
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var item in Model)
-                                {
-                                    <tr>
-                                        <td>
-                                            <p class="text-xs ps-3 font-weight-bold mb-0">
-                                                @Html.DisplayFor(modelItem => item.IdEmployee)
-                                            </p>
-                                        </td>
-                                        <td>
-                                            <h6 class="mb-0 text-sm">
-                                                @Html.DisplayFor(modelItem => item.Name)
-
-                                            </h6>
-                                        </td>
-                                        <td>
-                                            <p class="text-xs font-weight-bold mb-0">
-                                                @Html.DisplayFor(modelItem => item.Email)
-
-                                            </p>
-                                        </td>
-                                        <td class="align-middle text-center text-sm">
-                                            <span class="badge badge-sm bg-gradient-success">
-                                                @Html.DisplayFor(modelItem => item.Address)
-
-                                            </span>
-                                        </td>
-                                        <td class="align-middle text-center">
-                                            <span class="text-secondary text-xs font-weight-bold">
-                                                @Html.DisplayFor(modelItem => item.Phone)
-
-                                            </span>
-                                        </td>
-                                    </tr>
-                                }
-
-
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-</div>
 *@
+

@@ -1,8 +1,109 @@
-Dashboard Table
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .chat-container {
+      height: 80vh;
+    }
+    .message {
+      border-radius: 10px;
+      max-width: 70%;
+    }
+    .message-text {
+      word-wrap: break-word;
+    }
+    .sender-name {
+      font-weight: bold;
+    }
+    .message-time {
+      font-size: 0.8rem;
+      color: #6c757d;
+    }
+    .message.sender .message-text {
+      background-color: #e9ecef;
+      text-align: left;
+    }
+    .message.receiver .message-text {
+      background-color: #007bff;
+      color: white;
+      text-align: right;
+    }
+  </style>
+</head>
+<body>
 
-Id
-Name
-Email
-Password
-Status
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header bg-primary text-white">Real Chat</div>
+        <div class="card-body p-0 chat-container">
+          <!-- Chat messages -->
+          <div class="p-3" id="chat-messages">
+            <!-- Messages will be dynamically added here -->
+          </div>
+        </div>
+        <div class="card-footer">
+          <!-- Message input -->
+          <form id="message-form">
+            <div class="input-group">
+              <input type="text" class="form-control" id="message-input" placeholder="Type your message...">
+              <button type="submit" class="btn btn-primary">Send</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
+<!-- Bootstrap JS (optional) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.bundle.min.js"></script>
+<!-- Custom JavaScript -->
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const chatMessages = document.getElementById('chat-messages');
+    const messageForm = document.getElementById('message-form');
+    const messageInput = document.getElementById('message-input');
+
+    messageForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+      const messageText = messageInput.value.trim();
+      if (messageText !== '') {
+        sendMessage('Sender', messageText, 'sender');
+        messageInput.value = '';
+      }
+    });
+
+    function sendMessage(sender, message, messageType) {
+      const messageDiv = document.createElement('div');
+      messageDiv.classList.add('message', 'mb-3', messageType);
+
+      const messageTextDiv = document.createElement('div');
+      messageTextDiv.classList.add('message-text', 'p-2');
+      
+      const senderSpan = document.createElement('span');
+      senderSpan.classList.add('sender-name');
+      senderSpan.textContent = sender + ': ';
+
+      const messageSpan = document.createElement('span');
+      messageSpan.textContent = message;
+
+      const timeSpan = document.createElement('span');
+      timeSpan.classList.add('message-time');
+      const now = new Date();
+      const timeString = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+      timeSpan.textContent = timeString;
+
+      messageTextDiv.appendChild(senderSpan);
+      messageTextDiv.appendChild(messageSpan);
+      messageTextDiv.appendChild(timeSpan);
+      messageDiv.appendChild(messageTextDiv);
+
+      chatMessages.appendChild(messageDiv);
+
+      // Scroll to the bottom of the chat container
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+  });
+</script>
