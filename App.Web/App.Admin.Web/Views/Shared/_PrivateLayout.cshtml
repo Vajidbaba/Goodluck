@@ -30,6 +30,25 @@
 
     <script>
         $(document).ready(function () {
+            document.querySelectorAll('[data-bs-toggle="collapse"]').forEach(button => {
+                button.addEventListener('click', function () {
+                    // Remove active class from all buttons
+                    document.querySelectorAll('[data-bs-toggle="collapse"]').forEach(btn => {
+                        btn.classList.remove('active');
+                    });
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    // Close other open collapse elements
+                    const target = this.getAttribute('data-bs-target');
+                    document.querySelectorAll('.collapse.show').forEach(collapse => {
+                        if (collapse.getAttribute('id') !== target.slice(1)) {
+                            const bsCollapse = new bootstrap.Collapse(collapse);
+                            bsCollapse.hide();
+                        }
+                    });
+                });
+            });
+
             var current = window.location.pathname;
             $('.navbar-nav li a').each(function () {
                 var $this = $(this);
